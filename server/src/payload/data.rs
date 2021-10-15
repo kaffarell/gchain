@@ -11,6 +11,16 @@ pub struct Transaction {
 }
 
 
+// Optional Transaction Struct
+
+#[derive(Hash)]
+#[derive(Serialize, Deserialize)]
+pub struct TransactionDev {
+    pub sender: String,
+    pub data: String,
+    pub signature: Vec<u8>
+}
+
 impl std::fmt::Display for Transaction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "(\nsender: {}\nreceiver: {}\namount: {}\n)", 

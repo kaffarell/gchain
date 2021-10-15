@@ -16,7 +16,10 @@ impl Chain {
 
     pub fn add(&mut self, mut block: block::Block) {
         if db::get_total_height(&self.db) >= 1 {
-            block.prev_hash = db::get(&self.db, (db::get_total_height(&self.db)-1) as i32).hash;
+            block.prev_hash = db::get(
+                &self.db, 
+                (db::get_total_height(&self.db)-1) as i32
+            ).unwrap().hash;
             block.height = db::get_total_height(&self.db);
         }else{
             // TODO: Genesis Block has to be generated prior to all other blocks
@@ -33,6 +36,8 @@ impl Chain {
         return string;
     }
 
+    // TODO: implement chain validation
+    #[allow(dead_code)]
     pub fn validate(&self){
         
     }

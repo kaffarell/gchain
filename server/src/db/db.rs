@@ -3,7 +3,7 @@ use leveldb::database::Database;
 use leveldb::iterator::Iterable;
 use leveldb::kv::KV;
 use leveldb::options::{Options, WriteOptions, ReadOptions};
-use crate::blockchain::block;
+use crate::blockchain::block::Block;
 
 
 pub fn create_database() -> Database<i32> {
@@ -25,24 +25,34 @@ pub fn create_database() -> Database<i32> {
     return database;
 }
 
-pub fn get(database: &Database<i32>, index: i32) -> block::Block{
+pub fn get(database: &Database<i32>, index: i32) -> Option<Block> {
     // TODO: Fix index here, should be i64
     // Read from database
     let read_opts = ReadOptions::new();
     let res = database.get(read_opts, index);
+    // res is a result so we have to check if it is Ok or Err
     match res {
         Ok(data) => {
-            // data is another Option, so unwrapt it and convert the u8 vector to a string
-            let string = String::from_utf8(data.unwrap()).expect("Error converting database data to string");
-            // Convert json string to Block struct
-            return serde_json::from_str(&string).unwrap();
+            // data is an Option so we check if it is empty or not
+            match data {
+                Some(data) => {
+                    // If we get some data convert the u8 vec to a string
+                    let string: String = String::from_utf8(data).expect("Error converting database result (u8 vec) to string");
+                    // Convert json string to Block struct
+                    return Some(serde_json::from_str::<Block>(&string).unwrap());
+                }
+                None => {
+                    return None;
+                }
+
+            }
         }
         Err(e) => {panic!("Failed to read from database: {:?}", e)}
     };
 
 }
 
-pub fn put(database: &Database<i32>, block: &block::Block) {
+pub fn put(database: &Database<i32>, block: &Block) {
     // Write to database
     let write_ops = WriteOptions::new();
     let string = serde_json::to_string(block).unwrap();
