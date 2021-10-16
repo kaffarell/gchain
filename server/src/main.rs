@@ -15,16 +15,30 @@ use rocket::http::Status;
 
 #[post("/add", data = "<transaction>")] 
 async fn add_transaction(transaction: String) -> Status{
+    // Intialize chain or open existing one
     let chain: Chain = Chain::new();
+
+    // TODO: Group multiple transactions into different blocks
     let mut block: Block = Block::new();
     let mut data: Vec<Transaction> = Vec::new();
-    let t: Transaction = serde_json::from_str(&transaction).unwrap();
+
+    // Parse json string to Transaction struct
+    let transaction: Transaction = match serde_json::from_str(&transaction) {
+        Ok(t) => {
+            t
+        }
+        Err(_) => {
+            println!("Error parsing transaction json");
+            return Status::BadRequest;
+        }
+    };
+
     // Check if transaction is signed correctly
-    if utils::crypto::verify_transaction(&t) == false {
+    if utils::crypto::verify_transaction(&transaction) == false {
         return Status::BadRequest;
     }
     
-    data.push(t);
+    data.push(transaction);
     // Get time
     let time: DateTime<Local> = Local::now();
     block.initialize(data, time.to_string());

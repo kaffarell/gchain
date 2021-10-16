@@ -88,6 +88,8 @@ mod tests {
         assert_eq!(verify_transaction(&transaction), true);
 
     }
+
+    /// Helper function for the test that signs a transaction with a pre-defined private key
     fn sign(transaction: &mut Transaction) {
 
         let private_key: &str = "-----BEGIN RSA PRIVATE KEY-----\n\
