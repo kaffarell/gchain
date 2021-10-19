@@ -81,7 +81,7 @@ mod tests {
         let mut transaction: Transaction = Transaction{
             sender: "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCC5rXBOB2C3KMIx0CNv8Mv1+KfeD/I3/GIG7z06WGqX+wcN2H8Vn/AgO7q5xLf8oHIM7aUR6GEYpdniu65/Gq+cl9bOqOW013SxtZgXchyhhI/RTgxaBEWvl6ETGx19SrPoFmpLIQMCn+sCx4EmyA5rs/+5JFxAcr0IOQA3V+cMwIDAQAB".to_string(),
             receiver: "test".to_string(), 
-            amount: "0".to_string(), 
+            data: "0".to_string(), 
             signature: vec![0]
         };
         sign(&mut transaction);
