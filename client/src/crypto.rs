@@ -3,7 +3,7 @@ use openssl::pkey::PKey;
 use openssl::sign::{Signer};
 use openssl::hash::MessageDigest;
 use std::fs;
-use crate::data;
+use transaction::Transaction;
 
 pub fn generate_keys(){
     let rsa = Rsa::generate(1024).unwrap();
@@ -21,7 +21,7 @@ pub fn generate_keys(){
     fs::write("./pub.pem", public_key_string).expect("Unable to write private key file");
 }
 
-pub fn sign(transaction: &mut data::Transaction) {
+pub fn sign(transaction: &mut Transaction) {
     // To String
     let priv_data =  fs::read_to_string("./priv.pem").expect("Unable to read private key file");
 

@@ -1,12 +1,11 @@
 #![feature(proc_macro_hygiene, decl_macro)]
 mod blockchain;
-mod payload;
 mod utils;
 mod db;
 
 use blockchain::block::*;
 use blockchain::chain::*;
-use payload::data::Transaction;
+use transaction::Transaction;
 use chrono::prelude::*;
 use rocket::http::Status;
 

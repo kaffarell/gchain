@@ -1,5 +1,5 @@
 use std::io::stdin;
-mod data;
+use transaction::Transaction;
 mod crypto;
 mod requests;
 
@@ -29,7 +29,7 @@ fn main() {
         public_key_string = public_key_string.replace("\n", "").replace("\r", "");
 
         // Sign
-        let mut tran: data::Transaction = data::Transaction{
+        let mut tran: Transaction = Transaction{
             sender: public_key_string, 
             receiver: recipient_input, 
             data: data_input, 

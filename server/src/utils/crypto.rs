@@ -3,7 +3,7 @@ use openssl::sign::{Verifier};
 use openssl::rsa::Rsa;
 use openssl::pkey::PKey;
 use openssl::hash::MessageDigest;
-use crate::payload::data::Transaction;
+use transaction::Transaction;
 
 pub fn hash_md5<T: AsRef<[u8]>>(t: T) -> String {
     let digest = md5::compute(t);

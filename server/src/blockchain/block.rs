@@ -1,4 +1,4 @@
-use crate::payload::data::Transaction;
+use transaction::Transaction;
 use crate::utils::crypto;
 use serde::{Serialize, Deserialize};
 

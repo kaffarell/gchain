@@ -1,4 +1,4 @@
-use crate::data::Transaction; 
+use transaction::Transaction;
 
 
 pub fn send_transaction(transaction: &Transaction) {
