@@ -56,6 +56,11 @@ fn get_chain() -> String {
     return chain.print();
 }
 
+#[get("/")]
+fn get_status() -> Status{
+    return Status::Accepted;
+}
+
 async fn add_block_to_chain(mut block: Block, mut chain: Chain) {
     println!("Adding blocks...");
     block.mine();
@@ -71,5 +76,5 @@ async fn main() {
     let t = Transaction{sender: "065sjdfsdf45".to_string(), receiver: "34h3453h345".to_string(), data: "".to_string(), signature: vec![0, 0, 0]};
     println!("{}", serde_json::to_string(&t).unwrap());
 
-    rocket::build().mount("/", routes![add_transaction, get_chain]).launch().await.ok();
+    rocket::build().mount("/", routes![add_transaction, get_chain, get_status]).launch().await.ok();
 }
