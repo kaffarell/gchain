@@ -1,6 +1,5 @@
 use transaction::Transaction;
-use reqwest::StatusCode;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
 
 pub fn send_transaction(transaction: &Transaction) {
