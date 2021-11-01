@@ -58,6 +58,7 @@ fn get_chain() -> String {
 
 #[get("/")]
 fn get_status() -> Status{
+    // TODO: Check the database status
     return Status::Accepted;
 }
 

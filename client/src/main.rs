@@ -60,6 +60,8 @@ fn main() {
         println!("{}", crypto::get_public_key());
         println!("Private key:");
         println!("{}", crypto::get_private_key());
+        println!("Blockchain status:");
+        println!("{}", requests::uptime_check());
     }else{
         println!("Input error");
     }
