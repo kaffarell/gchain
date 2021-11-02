@@ -1,9 +1,14 @@
 use std::io::stdin;
 use transaction::Transaction;
+use dotenv::dotenv;
+
 mod crypto;
 mod requests;
 
+
 fn main() {
+    // Load .env config
+    dotenv().ok();
     // Check if new public/private key or use existing one
     println!("[1] Create new pub/priv key pair \n[2] Make Transaction \n[3] Show Info");
     let mut line = String::new();
